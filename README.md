@@ -62,7 +62,7 @@ c.DockerSpawner.debug = True
 c.JupyterHub.hub_ip = 'jupyterhub'
 # IP Configurations
 c.JupyterHub.ip = '0.0.0.0'
-c.JupyterHub.port = 80
+c.JupyterHub.port = 8000
 # OAuth with GitHub
 c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
 c.Authenticator.whitelist = whitelist = set()
