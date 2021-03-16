@@ -21,7 +21,7 @@ sudo chmod -R 777 /data/jupyterhub
 ```
 cp jupyterhub_config.py /data/jupyterhub/config/jupyterhub_config.py
 ```  
-jupyterhub_config  
+jupyterhub_config.py  
 ```
 # Configuration file for Jupyter Hub
 c = get_config()
