@@ -93,3 +93,38 @@ userlist
 viewlog admin
 wengel
 ```  
+### 编译jupyterhub镜像
+```
+docker build -t viewlog/jupyterhub .
+```  
+Dockerfile  
+```
+ARG BASE_IMAGE=jupyterhub/jupyterhub
+FROM ${BASE_IMAGE}
+RUN pip install --no-cache --upgrade jupyter
+RUN pip install --no-cache dockerspawner
+RUN pip install --no-cache oauthenticator
+EXPOSE 8000
+```  
+### 编译单用户jupyter的dockerfile，并开启lab
+```
+docker build -t viewlog/jupyter_lab_singleuser .
+```  
+Dockerfile  
+```  
+ARG BASE_IMAGE=jupyterhub/singleuser
+FROM ${BASE_IMAGE}
+# 加速
+# RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+# RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+# RUN conda config --set show_channel_urls yes
+# Install jupyterlab
+# RUN conda install -c conda-forge jupyterlab
+RUN pip install jupyterlab
+RUN jupyter serverextension enable --py jupyterlab --sys-prefix
+USER jovyan  
+```  
+### 创建jupyterhub的docker容器，映射8000端口  
+```
+docker run -p 8000:8000 -d --name jupyterhub --network jupyterhub_network -v /var/run/docker.sock:/var/run/docker.sock -v /data/jupyterhub/config:/srv/jupyterhub -v /data/jupyterhub/home:/home  --restart=always viewlog/jupyterhub
+```
