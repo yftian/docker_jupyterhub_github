@@ -101,6 +101,7 @@ Dockerfile
 ```
 ARG BASE_IMAGE=jupyterhub/jupyterhub
 FROM ${BASE_IMAGE}
+RUN python3 -m pip install --upgrade pip
 RUN pip install --no-cache --upgrade jupyter
 RUN pip install --no-cache dockerspawner
 RUN pip install --no-cache oauthenticator
@@ -120,6 +121,7 @@ FROM ${BASE_IMAGE}
 # RUN conda config --set show_channel_urls yes
 # Install jupyterlab
 # RUN conda install -c conda-forge jupyterlab
+RUN python3 -m pip install --upgrade pip
 RUN pip install jupyterlab
 RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 USER jovyan  
