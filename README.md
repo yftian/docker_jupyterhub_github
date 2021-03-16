@@ -12,14 +12,14 @@ docker network create --driver bridge jupyterhub_network
 ```  
 ###  创建jupyterhub的volume  
 ```
-sudo mkdir -pv /data/jupyterhub/jupyterhub   #存放jupyterhub的配置文件
+sudo mkdir -pv /data/jupyterhub/config   #存放jupyterhub的配置文件
 sudo mkdir -pv /data/jupyterhub/home     #存放jupyterhub用户保存的文件
 sudo chown -R root /data/jupyterhub
 sudo chmod -R 777 /data/jupyterhub
 ```  
 ###  复制jupyterhub_config.py到volume  
 ```
-cp jupyterhub_config.py /data/jupyterhub/jupyterhub/jupyterhub_config.py
+cp jupyterhub_config.py /data/jupyterhub/config/jupyterhub_config.py
 ```  
 jupyterhub_config  
 ```
@@ -86,7 +86,7 @@ c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 ```  
 ### 复制userlist到volume,userlist存储了用户名以及权限  
 ```
-cp userlist /data/jupyterhub/userlist
+cp userlist /data/jupyterhub/config/userlist
 ```  
 userlist  
 ```
